@@ -1,0 +1,110 @@
+{% include 'base.html' %}
+
+{% block title %}
+    <title>Edit Borrower</title>
+{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            background-color: #a8a29e;
+        }
+        
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #67e8f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="address"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        
+        input[type="submit"] {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Edit Borrower</h1>
+
+        <!-- Borrower Edit Form -->
+        <form action="{% url 'borrower_edit' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="fetch_borrower" value="true">
+
+            <!-- Borrower ID input -->
+            <label for="borrower_id">Borrower ID:</label>
+            <input type="text" name="borrower_id" id="borrower_id" required>
+
+            <button type="submit" class="btn btn-primary">Fetch Borrower</button>
+            
+        </form>
+        <br>
+         {% if error_message %}
+                <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <p class="text-danger alert alert-danger">{{ error_message }}</p>
+                </div>
+                </div>
+        {% endif %}
+        
+
+        <!-- Display fetched borrower details -->
+        {% if borrower %}
+            <h2>Borrower Details</h2>
+            <form action="{% url 'borrower_edit' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="update_borrower" value="true">
+                <input type="hidden" name="borrower_id" value="{{ borrower.id }}">
+
+                <!-- Display borrower details -->
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" value="{{ borrower.name }}" required>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" value="{{ borrower.email }}" required>
+
+                <label for="address">Address:</label>
+                <input type="address" name="address" id="address" value="{{ borrower.address }}" required>
+
+                <label for="phone_number">Phone:</label>
+                <input type="text" name="phone_number" id="phone_number" value="{{ borrower.phone_number }}" required>
+
+                <button type="submit" class="btn btn-primary">Update Borrower</button>
+            </form>
+
+        {% endif %}
+     
+
+        
+    </div>
+{% endblock %}

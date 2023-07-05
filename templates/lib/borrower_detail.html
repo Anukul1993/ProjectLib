@@ -1,0 +1,61 @@
+<!-- borrower_detail.html -->
+{% include 'base.html' %}
+
+{% block title %}
+    <title>Borrower Detail</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        body {
+            background-color: #a8a29e;
+        }
+        
+        .container {
+            margin-top: 40px;
+        }
+        
+        .card {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #67e8f9;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Borrower Details</h1>
+
+        <form class="text-center mt-4">
+            <div class="form-group row">
+                <label for="borrower_id" class="col-sm-2 col-form-label">Borrower ID:</label>
+                <div class="col-sm-8">
+                    <input type="number" id="borrower_id" name="borrower_id" class="form-control" required>
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Fetch Details</button>
+                </div>
+            </div>
+        </form>
+
+        {% if borrower %}
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ borrower.name }}</h2>
+                    <p class="card-text"><strong>Email:</strong> {{ borrower.email }}</p>
+                    <p class="card-text"><strong>Address:</strong> {{ borrower.address }}</p>
+                    <p class="card-text"><strong>Phone Number:</strong> {{ borrower.phone_number }}</p>
+                </div>
+            </div>
+        {% else %}
+        {% if error_message %}
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <p class="text-danger alert alert-danger">{{ error_message }}</p>
+          </div>
+        </div>
+      {% endif %} 
+        {% endif %}
+    </div>
+{% endblock %}
+     

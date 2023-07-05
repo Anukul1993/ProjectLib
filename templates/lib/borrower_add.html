@@ -1,0 +1,47 @@
+<!-- borrower_add.html -->
+{% include 'base.html' %}
+
+{% block content %}
+    <style>
+        body {
+            background-color: #a8a29e;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #67e8f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Add Borrower</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+            </div>
+            <input type="submit" value="Add Borrower" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}

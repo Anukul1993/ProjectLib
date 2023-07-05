@@ -1,0 +1,67 @@
+<!-- borrower_list.html -->
+{% include 'base.html' %}
+
+
+
+{% block content %}
+    <style>
+        body {
+            background-color: #a8a29e;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #67e8f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            font-size: 16px;
+        }
+
+        .table thead th {
+            font-weight: bold;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .table-striped tbody tr:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Borrower List</h1>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Borrower ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for borrower in borrowers %}
+                    <tr>
+                        <td>{{ borrower.id }}</td>
+                        <td>{{ borrower.name }}</td>
+                        <td>{{ borrower.email }}</td>
+                        <td>{{ borrower.address }}</td>
+                        <td>{{ borrower.phone_number }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

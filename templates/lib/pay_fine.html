@@ -1,0 +1,12 @@
+{% include 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Pay Fine</h1>
+  <p>Fine Amount: {{ fine }}</p>
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Pay Now</button>
+  </form>
+</div>
+{% endblock %}

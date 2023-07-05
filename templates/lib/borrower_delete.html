@@ -1,0 +1,108 @@
+{% include 'base.html' %}
+
+{% block title %}
+    <title>Delete Borrower</title>
+{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            background-color: #a8a29e;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #67e8f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        table {
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #343a40;
+            color: #fff;
+            text-align: left;
+            padding: 12px;
+            font-weight: bold;
+        }
+
+        table td {
+            padding: 12px;
+        }
+
+        table tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        button[type="submit"] {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Delete Borrower</h1>
+
+        <!-- Borrower List Table -->
+        
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Borrower ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Fetch and display borrower data -->
+                {% for borrower in borrowers %}
+                <tr>
+                    <td>{{ borrower.id }}</td>
+                    <td>{{ borrower.name }}</td>
+                    <td>{{ borrower.email }}</td>
+                    <td>{{ borrower.phone }}</td>
+                    <td>
+                        <!-- Delete button -->
+                        <form action="/borrower_delete/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="borrower_id" value="{{ borrower.id }}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

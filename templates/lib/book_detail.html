@@ -1,0 +1,75 @@
+{% include 'base.html' %}
+
+{% block title %}
+  <title>Book Detail</title>
+{% endblock %}
+
+{% block style %}
+  <style>
+    body {
+      background-color: #a8a29e;
+    }
+    
+    .container {
+      margin-top: 40px;
+    }
+    
+    .card {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #67e8f9;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="text-center">Book Details</h1>
+
+    <form class="text-center mt-4">
+      <div class="form-group row">
+        <label for="book_id" class="col-sm-2 col-form-label text-right">Book ID:</label>
+        <div class="col-sm-8">
+          <input type="number" id="book_id" name="book_id" class="form-control" required />
+        </div>
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-primary">Fetch Details</button>
+        </div>
+      </div>
+    </form>
+
+    {% if error_message %}
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <p class="text-danger alert alert-danger">{{ error_message }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if book %}
+      <div class="card mt-4">
+        <div class="card-body">
+          <h2 class="card-title">{{ book.title }}</h2>
+          <p class="card-text">
+            <strong>Author:</strong> {{ book.author }}
+          </p>
+          <p class="card-text">
+            <strong>ISBN:</strong> {{ book.isbn }}
+          </p>
+          <p class="card-text">
+            <strong>Genre:</strong> {{ book.genre }}
+          </p>
+          <p class="card-text">
+            <strong>Publication Date:</strong> {{ book.publication_date }}
+          </p>
+          <p class="card-text">
+            <strong>Availability:</strong> {% if book.availability %}
+              Available
+            {% else %}
+              Not Available
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
